@@ -1,0 +1,8 @@
+<ul ng-init="init()">  
+  <li ng-repeat="image in images" style=" float: left;">
+    <img ng-src="{{image.src}}"
+         alt="{{image.id}}"
+         width="{{image.width}}"
+         height="{{image.height}}" />
+  </li>
+</ul>
