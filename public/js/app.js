@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('App', [
-'ngRoute'
+'ngRoute',
+'uiGmapgoogle-maps'
 ])
 .config(function ($routeProvider, $locationProvider) {
   $routeProvider

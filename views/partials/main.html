@@ -1,8 +1,4 @@
-<ul ng-init="init()">  
-  <li ng-repeat="image in images" style=" float: left;">
-    <img ng-src="{{image.src}}"
-         alt="{{image.id}}"
-         width="{{image.width}}"
-         height="{{image.height}}" />
-  </li>
-</ul>
+<ui-gmap-google-map center='map.center' zoom='map.zoom' ng-init="init()">
+  <ui-gmap-markers models="images" coords="'self'" options="'options'">
+  </ui-gmap-markers>
+</ui-gmap-google-map>

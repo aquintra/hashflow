@@ -1,8 +1,8 @@
 var express = require("express");
 var app = express();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3333;
 var io = require('socket.io').listen(app.listen(port));
-var siteUrl = 'http://16724e89.ngrok.com/';
+var siteUrl = '<YOUR-URL-HERE>';
 var Instagram = require('instagram-node-lib');
 var http = require('http');
 var request = ('request');
@@ -26,7 +26,6 @@ Instagram.set('callback_url', siteUrl + 'callback');
 Instagram.set('redirect_uri', siteUrl);
 Instagram.set('maxSockets', 10);
 
-// Instagram subscribe
 Instagram.subscriptions.subscribe({
   object: 'tag',
   object_id: tag,
@@ -62,16 +61,6 @@ app.get("/views", function(req, res){
     res.render("index");
 });
 
-// Get first images
-io.sockets.on('connection', function (socket) {
-  Instagram.tags.recent({
-      name: tag,
-      complete: function(data) {
-        socket.emit('firstShow', { firstShow: data });
-      }
-  });
-});
-
 app.get('/callback', function(req, res){
     var handshake =  Instagram.subscriptions.handshake(req, res);
 });
@@ -79,7 +68,6 @@ app.get('/callback', function(req, res){
 // Get data for every new image
 app.post('/callback', function(req, res) {
     var data = req.body;
-
     data.forEach(function(tag) {
       var url = 'https://api.instagram.com/v1/tags/' + tag.object_id + '/media/recent?client_id='+clientID;
       sendMessage(url);

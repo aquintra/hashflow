@@ -4,33 +4,40 @@ var socket = io.connect();
 
 angular.module('App')
 .controller('mainCtrl', function ($scope) {
+
   var self = $scope;
   self.images = [];
-  console.log(self.images);
+
+  self.map = {
+    center: {
+      latitude: 25,
+      longitude: 10
+    },
+    zoom: 3
+  };
 
   self.init = function () {
-    self.firstImages();
     self.realTime();
-  }
+  };
 
   self.imageData = function (data) {
     return {
-      id:     data.id,
-      url:    data.link,
-      src:    data.images.low_resolution.url,
-      width:  data.images.low_resolution.width,
-      height: data.images.low_resolution.height
+      id:        data.id,
+      url:       data.link,
+      src:       data.images.low_resolution.url,
+      width:     data.images.low_resolution.width,
+      height:    data.images.low_resolution.height,
+      latitude:  data.location.latitude,
+      longitude: data.location.longitude,
+      options: {
+        icon: {
+          url: data.images.low_resolution.url,
+          scaledSize: new google.maps.Size(60, 60)
+        },
+        animation: google.maps.Animation.DROP
+      }
     };
   };
-
-  self.firstImages = function () {
-    socket.on('firstShow', function (data) {
-      angular.forEach(data.firstShow, function(data, key) {
-        self.images.push(self.imageData(data));
-      });
-      self.$apply()
-    });
-  }
 
   self.realTime = function () {
     var load = true;
@@ -50,8 +57,6 @@ angular.module('App')
         }
 
         ajaxCall(function(data) {
-          var d = new Date();
-          var s = d.getSeconds();
 
           if (self.images.length >= 29) {
             self.images.splice(29, 1);
@@ -65,20 +70,23 @@ angular.module('App')
           }
 
           if (!isEqual) {
-            console.log(self.images);
-            setTimeout(function(){
+            setTimeout(function() {
               self.$apply(function() {
-                self.images.unshift(self.imageData(data.data[0]));
-                self.$apply;
+                if (data.data[0].location) {
+                  self.images.unshift(self.imageData(data.data[0]));
+                  self.$apply;
+                  console.log(self.images);
+                }
               });
               load = true;
-            }, 1000);
+            }, 200);
           }
 
         });
       }
     });
   }
+
 });
 
 })(this);
