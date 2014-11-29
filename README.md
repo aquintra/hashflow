@@ -3,7 +3,9 @@ hashflow
 
 Real time instagram flow
 
-### Get Started
+### Get started
+
+
 
 ```javascript
 npm install
