@@ -4,7 +4,7 @@ angular.module('App', [
 'ngRoute',
 'uiGmapgoogle-maps'
 ])
-.config(function ($routeProvider, $locationProvider) {
+.config(function ($routeProvider) {
   $routeProvider
   .when('/', {
     templateUrl: '/partials/main.html',
@@ -13,8 +13,6 @@ angular.module('App', [
   .otherwise({
     redirectTo: '/'
   });
-
-  $locationProvider.html5Mode(true);
 
 })
 .controller('appCtrl', function ($scope) {

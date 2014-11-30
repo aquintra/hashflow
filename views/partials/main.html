@@ -1,4 +1,21 @@
-<ui-gmap-google-map center='map.center' zoom='map.zoom' ng-init="init()">
+
+<div class="header">
+  <h1>Hashflow</h1>
+  <span class="clear" ng-click="reset()">
+    <i class="fa fa-refresh"></i>
+     Clear images
+  </span>
+</div>
+
+<ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options" ng-init="init()">
   <ui-gmap-markers models="images" coords="'self'" options="'options'">
   </ui-gmap-markers>
 </ui-gmap-google-map>
+
+<div class="images-flow">
+  <ul>
+    <li ng-repeat="image in images | limitTo : 4">
+      <img ng-src="{{image.src}}" alt="{{image.id}}" width="214" />
+    </li>
+  </ul>
+</div>

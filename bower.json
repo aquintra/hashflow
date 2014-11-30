@@ -7,6 +7,7 @@
     "angular-route": "1.2.x",
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
-    "angular-google-maps": "latest"
+    "angular-google-maps": "latest",
+    "fontawesome": "~4.2.0"
   }
 }
