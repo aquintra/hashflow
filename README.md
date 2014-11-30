@@ -11,3 +11,6 @@ Real time instagram flow
 npm install
 bower install
 ````
+
+### Demo
+http://hashflow.aquintra.com
