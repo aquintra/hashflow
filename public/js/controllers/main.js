@@ -23,10 +23,6 @@ angular.module('App')
       self.images = [];
     }
 
-    self.init = function () {
-      self.realTime();
-    };
-
     self.imageData = function (data) {
       return {
         id:        data.id,
@@ -41,7 +37,6 @@ angular.module('App')
             url: data.images.low_resolution.url,
             scaledSize: new google.maps.Size(60, 60)
           },
-          animation: google.maps.Animation.DROP
         }
       };
     };
@@ -93,6 +88,10 @@ angular.module('App')
         }
       });
     }
+
+    self.init = function () {
+      self.realTime();
+    };
 
   });
 

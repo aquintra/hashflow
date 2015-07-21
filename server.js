@@ -2,13 +2,12 @@ var express = require("express");
 var app = express();
 var port = process.env.PORT || 3333;
 var io = require('socket.io').listen(app.listen(port));
-var siteUrl = 'http://hashflow.aquintra.com';
+var siteUrl = 'http://9abd2b82.ngrok.io/';
 var Instagram = require('instagram-node-lib');
 var http = require('http');
 var request = ('request');
 var intervalID;
-
-var tag = "selfie";
+var tag = 'selfie';
 
 var pub = __dirname + '/public',
     view = __dirname + '/views';
